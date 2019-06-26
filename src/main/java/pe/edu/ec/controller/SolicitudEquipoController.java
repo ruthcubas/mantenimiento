@@ -47,7 +47,7 @@ public class SolicitudEquipoController {
 			model.addAttribute("error", e.getMessage());
 			
 		}
-		return "/solicitudequipo/lista";
+		return "solicitudequipo/lista";
 		
 	}
 	
@@ -69,7 +69,7 @@ public class SolicitudEquipoController {
 			model.addAttribute("error", "Error en obtener la lista");
 			return "redirect:/solicitudequipo/lista";
 		}
-		return "/solicitudequipo/lista";
+		return "solicitudequipo/lista";
 	}
 	
 
@@ -89,7 +89,7 @@ public class SolicitudEquipoController {
 				model.addAttribute("Error", "No se pudo guardar el detalle");
 			
 			}
-			return "/solicitudequipo/nuevo"; 
+			return "solicitudequipo/nuevo"; 
 		}
 		
 	 @PostMapping("/guardar")
@@ -140,7 +140,7 @@ public class SolicitudEquipoController {
 			} catch (Exception e) {
 				model.addAttribute("error", "Detalle no encontrado");
 			}
-			return "/solicitudequipo/editar";	
+			return "solicitudequipo/editar";	
 		}
 		
 	}

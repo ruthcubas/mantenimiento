@@ -35,7 +35,7 @@ public class RolController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Error al obtener la lista");
 		}
-		return "/rol/lista";
+		return "rol/lista";
 	}
 	
 	@GetMapping("/buscar")
@@ -62,7 +62,7 @@ public class RolController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/rol/lista";
+		return "rol/lista";
 	}
 	
 	@GetMapping("/nuevo")
@@ -76,7 +76,7 @@ public class RolController {
 			model.addAttribute("Error", "Rol no se ha guardado");
 		}
 		
-		return "/rol/nuevooo"; 
+		return "rol/nuevooo"; 
 	}
 		
 	@PostMapping("/guardar")
@@ -105,7 +105,7 @@ public class RolController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Rol no encontrada");
 		}
-		return "/rol/editar";
+		return "rol/editar";
 		
 	}
 	

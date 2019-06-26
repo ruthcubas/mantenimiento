@@ -44,7 +44,7 @@ public class ModeloController {
 			model.addAttribute("error", e.getMessage());
 			
 		}
-		return "/modelo/lista";
+		return "modelo/lista";
 		
 	}
 	
@@ -74,7 +74,7 @@ public class ModeloController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return"/modelo/lista";
+		return"modelo/lista";
 		
 		
 		
@@ -92,7 +92,7 @@ public class ModeloController {
 			model.addAttribute("Error", "No se pudo guardar el modelo");
 		
 		}
-		return "/modelo/nuevo"; 
+		return "modelo/nuevo"; 
 	}
 	@GetMapping("/editar/{id}")
 	public String editarModelo( @PathVariable("id") Integer id, Model model) {
@@ -109,7 +109,7 @@ public class ModeloController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Modelo no encontrado");
 		}
-		return "/modelo/editar";	
+		return "modelo/editar";	
 	}
 	
 	@PostMapping("/guardar")

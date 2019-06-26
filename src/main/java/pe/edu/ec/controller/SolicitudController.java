@@ -36,7 +36,7 @@ public class SolicitudController {
 			model.addAttribute("error", e.getMessage());
 			
 		}
-		return "/solicitud/lista";
+		return "solicitud/lista";
 		
 	}
 	@GetMapping("/buscar")
@@ -56,7 +56,7 @@ public class SolicitudController {
 			model.addAttribute("error", "Error en obtener la lista");
 			return "redirect:/solicitud/lista";
 		}
-		return "/solicitud/lista";
+		return "solicitud/lista";
 	}
 	
 	
@@ -72,7 +72,7 @@ public class SolicitudController {
 			model.addAttribute("Error", "La solicitud no se ha guardado");
 		}
 		
-		return "/solicitud/nuevo"; 
+		return "solicitud/nuevo"; 
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -88,7 +88,7 @@ public class SolicitudController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Solicitud no encontrada");
 		}
-		return "/solicitud/editar";
+		return "solicitud/editar";
 		
 	}
 	

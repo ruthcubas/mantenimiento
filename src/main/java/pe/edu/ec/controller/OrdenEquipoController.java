@@ -52,7 +52,7 @@ public class OrdenEquipoController {
 			model.addAttribute("error", e.getMessage());
 			
 		}
-		return "/ordenequipo/lista";
+		return "ordenequipo/lista";
 		
 	}
 	
@@ -74,7 +74,7 @@ public class OrdenEquipoController {
 			model.addAttribute("error", "Error en obtener la lista");
 			return "redirect:/ordenequipo/lista";
 		}
-		return "/ordenequipo/lista";
+		return "ordenequipo/lista";
 	}
 	
 
@@ -97,7 +97,7 @@ public class OrdenEquipoController {
 				model.addAttribute("Error", "No se pudo guardar el detalle");
 			
 			}
-			return "/ordenequipo/nuevo"; 
+			return "ordenequipo/nuevo"; 
 		}
 		
 	 @PostMapping("/guardar")
@@ -151,6 +151,6 @@ public class OrdenEquipoController {
 			} catch (Exception e) {
 				model.addAttribute("error", "Detalle no encontrado");
 			}
-			return "/ordenequipo/editar";	
+			return "ordenequipo/editar";	
 		}
 }

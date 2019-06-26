@@ -47,7 +47,7 @@ public class OrdenController {
 			model.addAttribute("error", e.getMessage());
 			
 		}
-		return "/orden/lista";
+		return "orden/lista";
 		
 	}
 	
@@ -69,7 +69,7 @@ public class OrdenController {
 			model.addAttribute("error", "Error en obtener la lista");
 			return "redirect:/orden/lista";
 		}
-		return "/orden/lista";
+		return "orden/lista";
 	}
 	
 
@@ -88,7 +88,7 @@ public class OrdenController {
 				model.addAttribute("Error", "No se pudo guardar el detalle");
 			
 			}
-			return "/orden/nuevo"; 
+			return "orden/nuevo"; 
 		}
 		
 	 @PostMapping("/guardar")
@@ -138,6 +138,6 @@ public class OrdenController {
 			} catch (Exception e) {
 				model.addAttribute("error", "Orden no encontrado");
 			}
-			return "/orden/editar";	
+			return "orden/editar";	
 		}
 }

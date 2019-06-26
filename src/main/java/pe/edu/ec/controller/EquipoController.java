@@ -45,7 +45,7 @@ public class EquipoController {
 			model.addAttribute("error", e.getMessage());
 			
 		}
-		return "/equipo/lista";
+		return "equipo/lista";
 		
 	}
 	
@@ -72,7 +72,7 @@ public class EquipoController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return"/equipo/lista";
+		return"equipo/lista";
 	}
 	
 	@GetMapping("/nuevo")
@@ -91,8 +91,9 @@ public class EquipoController {
 			model.addAttribute("Error", "El equipo no se ha guardado");
 		}
 		
-		return "/equipo/nuevo"; 
+		return "equipo/nuevo"; 
 	}
+	
 	@GetMapping("/editar/{id}")
 	public String editarEquipo( @PathVariable("id") Integer id, Model model) {
 
@@ -108,7 +109,7 @@ public class EquipoController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Equipo no encontrado");
 		}
-		return "/equipo/editar";
+		return "equipo/editar";
 		
 	}
 	
@@ -124,8 +125,6 @@ public class EquipoController {
 		} 
 		return "redirect:/equipo/lista";
 	}
-	
-	
 	
 	@GetMapping("/eliminar/{id}")
 	public String eliminarEquipo( @PathVariable("id") Integer id, Model model  ) {

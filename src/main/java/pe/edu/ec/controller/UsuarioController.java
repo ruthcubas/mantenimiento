@@ -40,7 +40,7 @@ public class UsuarioController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Error en obtener la lista");
 		}
-		return "/usuario/lista";
+		return "usuario/lista";
 	}
 	
   @GetMapping("/buscar")
@@ -76,7 +76,7 @@ public class UsuarioController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/usuario/lista";
+		return "usuario/lista";
 	}
   
   @GetMapping("/nuevo")
@@ -90,7 +90,7 @@ public class UsuarioController {
 			model.addAttribute("error", "No se pudo guardar al usuario");
 		
 		}
-		return "/usuario/nuevo"; 
+		return "usuario/nuevo"; 
 	}
 	
   
@@ -109,7 +109,7 @@ public class UsuarioController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Usuario no encontrado");
 		}
-		return "/usuario/editar";
+		return "usuario/editar";
 		
 	}
   

@@ -65,7 +65,7 @@ public class MarcaController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return"/marca/lista";
+		return"marca/lista";
 	}
 	
 	
@@ -80,7 +80,7 @@ public class MarcaController {
 			model.addAttribute("Error", "Marca no se ha guardado");
 		}
 		
-		return "/marca/nuevo"; 
+		return "marca/nuevo"; 
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -96,7 +96,7 @@ public class MarcaController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Marca no encontrada");
 		}
-		return "/marca/editar";
+		return "marca/editar";
 		
 	}
 	
