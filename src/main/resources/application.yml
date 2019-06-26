@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ecdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: 1234
+    url: jdbc:mysql://us-cdbr-iron-east-02.cleardb.net/heroku_09c7f423b4ed15b?reconnect=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: b97af0888f208b
+    password: 8fba329d
   jpa:
     database: MYSQL
     hibernate:
