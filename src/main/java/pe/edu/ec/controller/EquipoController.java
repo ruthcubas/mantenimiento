@@ -85,6 +85,7 @@ public class EquipoController {
 			
 			List<Modelo> modelos = modeloService.findAll();
 			model.addAttribute("modelo", modelos);
+			
 
 		} catch (Exception e) {
 			model.addAttribute("Error", "El equipo no se ha guardado");
@@ -132,6 +133,7 @@ public class EquipoController {
 			Optional<Equipo> buscado = equipoService.findById(id);
 			if(buscado.isPresent()) {
 				equipoService.deleteById(id);
+				
 			}
 		} catch (Exception e) {
 			model.addAttribute("error", "Equipo no eliminado");

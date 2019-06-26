@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-
 import pe.edu.ec.entity.Rol;
 import pe.edu.ec.service.RolService;
 
@@ -41,14 +40,29 @@ public class RolController {
 	
 	@GetMapping("/buscar")
 	public String buscar(@RequestParam("txtId") String nombre, Model model) {
+	
+		
+		
 		try {
-			List<Rol> roles =  rolService.fetchRolByNombre(nombre);
-			model.addAttribute("roles", roles);
-			
+
+			if (!nombre.isEmpty()) {
+				List<Rol> roles = rolService.fetchRolByNombre(nombre);
+				if (!roles.isEmpty()) {
+					model.addAttribute("roles", roles);
+				} else {
+					model.addAttribute("info", "No existe rol");
+					model.addAttribute("roles", rolService.findAll());
+				}
+
+			} else {
+				model.addAttribute("info", "Ingresar nombre del rol");
+				model.addAttribute("roles", rolService.findAll());
+			}
+
 		} catch (Exception e) {
-			model.addAttribute("error", "Error en obtener la lista");
+			model.addAttribute("error", e.getMessage());
 		}
-		return "/rol/lista";		
+		return "/rol/lista";
 	}
 	
 	@GetMapping("/nuevo")

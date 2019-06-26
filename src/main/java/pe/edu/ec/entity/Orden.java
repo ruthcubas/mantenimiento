@@ -30,6 +30,7 @@ public class Orden {
 	@JoinColumn(name = "solicitudequipo_id", nullable = false)
 	private SolicitudEquipo solicitudEquipoId;
 	
+
 	@OneToMany(mappedBy ="ordenId", fetch= FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<OrdenEquipo> ordenEquipos;
 	
@@ -51,6 +52,22 @@ public class Orden {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public SolicitudEquipo getSolicitudEquipoId() {
+		return solicitudEquipoId;
+	}
+
+	public void setSolicitudEquipoId(SolicitudEquipo solicitudEquipoId) {
+		this.solicitudEquipoId = solicitudEquipoId;
+	}
+
+	public List<OrdenEquipo> getOrdenEquipos() {
+		return ordenEquipos;
+	}
+
+	public void setOrdenEquipos(List<OrdenEquipo> ordenEquipos) {
+		this.ordenEquipos = ordenEquipos;
 	}
 
 	

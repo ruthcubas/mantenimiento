@@ -51,14 +51,34 @@ public class ModeloController {
 	@GetMapping("/buscar")
 	public String buscarModelo(@RequestParam("inputNombre") String nombre, Model model) {
 		
-		try {
-			List<Modelo > modelos =  modeloService.fetchModeloByNombre(nombre);
-			model.addAttribute("modelos",modelos);
+	
+		
+		
+	try {
+			
+			if(!nombre.isEmpty()) {
+				List<Modelo> modelos= modeloService.fetchModeloByNombre(nombre);
+				if(!modelos.isEmpty()) {
+					model.addAttribute("modelos", modelos );
+					}
+					else {
+						model.addAttribute("info", "No existe modelo");
+						model.addAttribute("modelos",modeloService.findAll() );
+				}
+				
+			}else {
+				model.addAttribute("info", "Ingresar nombre del modelo");
+				model.addAttribute("modelos",modeloService.findAll() );
+			}
 			
 		} catch (Exception e) {
-			model.addAttribute("error", "Error en obtener la lista");
+			model.addAttribute("error", e.getMessage());
 		}
-		return "/modelo/lista";
+		return"/modelo/lista";
+		
+		
+		
+		
 	}
 	
 	@GetMapping("/nuevo")

@@ -46,12 +46,35 @@ public class UsuarioController {
   @GetMapping("/buscar")
     
     public String buscarUsuario(@RequestParam("txtNombre") String nombre, Model model) {
-		try {
+		/*try {
 			List<Usuario > usuarios =  usuarioService.fetchUsuarioByNombre(nombre);
 			model.addAttribute("usuarios",usuarios);
 			
 		} catch (Exception e) {
 			model.addAttribute("error", "Error en obtener la lista");
+		}
+		return "/usuario/lista";
+		*/
+		
+
+		try {
+
+			if (!nombre.isEmpty()) {
+				List<Usuario> usuarios = usuarioService.fetchUsuarioByNombre(nombre);
+				if (!usuarios.isEmpty()) {
+					model.addAttribute("usuarios", usuarios);
+				} else {
+					model.addAttribute("info", "No existe usuario");
+					model.addAttribute("usuarios", usuarioService.findAll());
+				}
+
+			} else {
+				model.addAttribute("info", "Ingresar nombre del usuario");
+				model.addAttribute("usuarios", usuarioService.findAll());
+			}
+
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
 		}
 		return "/usuario/lista";
 	}
@@ -64,7 +87,7 @@ public class UsuarioController {
 			List<Rol> roles=rolservice.findAll();
 			model.addAttribute("roles", roles);
 		} catch (Exception e) {
-			model.addAttribute("Error", "No se pudo guardar al usuario");
+			model.addAttribute("error", "No se pudo guardar al usuario");
 		
 		}
 		return "/usuario/nuevo"; 

@@ -47,7 +47,9 @@ public class SolicitudController {
 			List<Solicitud> solicitudes = new ArrayList<>();
 			if (buscado.isPresent()) {
 				solicitudes.add(buscado.get());	
-			}else {}
+			}else {
+				model.addAttribute("info", "Ingresar nombre de la solicitud");
+			}
 			model.addAttribute("solicitud", solicitudes);
 			
 		} catch (Exception e) {

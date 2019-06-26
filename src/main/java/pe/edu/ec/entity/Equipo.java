@@ -29,7 +29,7 @@ public class Equipo {
 	@NotEmpty(message = "Ingrese el nombre del equipo")
 	private String nombre;
 	
-	@Column(name = "equipo_descripcion", nullable = false, length = 30)
+	@Column(name = "equipo_descripcion", nullable = false, length = 300)
 	@NotEmpty(message = "Ingrese la descripción del equipo")
 	private String descripcion;
 	

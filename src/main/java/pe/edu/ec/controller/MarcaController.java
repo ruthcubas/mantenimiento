@@ -103,10 +103,10 @@ public class MarcaController {
 	@PostMapping("/guardar")
 	public String guardarMarca(@ModelAttribute("marca") Marca marca, Model model, SessionStatus status) {
 		try {
-			
+
 			marcaService.save(marca);
 			status.setComplete();
-			model.addAttribute("success", "Marca guarada");
+			model.addAttribute("success", "Marca guardada");
 		} catch (Exception e) {
 			model.addAttribute("error", "Marca no guardada");
 		} 

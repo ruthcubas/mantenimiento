@@ -69,7 +69,7 @@
 								
 								<li class="nav-item active">
 								<a
-								class="nav-link" th:href="@{/}"><i class="fas fa-box"></i>
+								class="nav-link" th:href="@{/orden/lista}"><i class="fas fa-box"></i>
 								Orden <span class="sr-only">(current)</span> </a></li>
 
 
@@ -79,6 +79,12 @@
 
 		</nav>
 
+<div class="alert alert-success" th:if="${success != null}"
+th:text="${success}"></div>
+<div class="alert alert-danger" th:if="${error != null}"
+th:text="${error}"></div>
+<div class="alert alert-info" th:if="${info != null}"
+th:text="${info}"></div>
 	
 	</header>
 	<div class="container">

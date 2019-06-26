@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<p></p>
+		<div class="card border-secondary text-center">
+			<div class="card-header text-white bg-secondary">Editar
+				 Orden</div>
+			<div class="card-body">
+
+				<form th:action="@{/orden/guardar}" th:object="${orden}"
+					method="post">
+
+					<div class="form-group row">
+						<label for="txtId" class="col-sm-2 col-form-label">Id :</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="txtId" name="txtId"
+								placeholder="Id" th:value="${orden.id}" disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Descripcion
+							:</label>
+						<div class="col-sm-9">
+						<div class="input-group-prepend">
+						
+							<input type="text" class="form-control" id="descripcion" name="descripcion"
+								placeholder="Descripcion" th:value="${orden.descripcion}" >
+								</div>
+						</div>
+					</div>
+
+
+
+					<div class="form-group row">
+						<label for="txtLocation" class="col-sm-2 col-form-label">Solicitud Equipo
+							:</label>
+						<div class="col-sm-9">							
+							<select th:field="*{solicitudEquipoId}" class="form-control"  id="solicitudEquipoId" name="solicitudEquipoId">
+								<option th:each="eqp: ${solicitudequipo}"
+									th:value="${eqp.id}" th:text="@{'ID: '+${eqp.id}+' Fecha: '+${eqp.fecha}}"
+									></option>
+							</select>
+						</div>
+					</div>
+			
+
+
+					<div align="right" class="form-group row">
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-success">
+								<i class="fas fa-save"></i> Grabar
+							</button>
+							<a th:href="@{/orden/lista}" class="btn btn-danger"> <i
+								class="fas fa-undo"></i> Cancelar
+							</a>
+						</div>
+					</div>
+
+
+				</form>
+
+			</div>
+			<div class="card-footer text-muted border-primary"></div>
+		</div>
+
+
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
