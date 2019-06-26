@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<p></p>
+		<div class="card border-secondary text-center">
+			<div class="card-header text-white bg-secondary">Editar Marca</div>
+			<div class="card-body">
+
+				<form th:action="@{/marca/guardar}" th:object="${marca}"
+					method="post">
+
+					<div class="form-group row">
+						<label for="txtId" class="col-sm-2 col-form-label">Id :</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="txtId" name="txtId"
+								placeholder="Id" th:value="${marca.id}" disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="txtNombre" class="col-sm-2 col-form-label">Nombre
+							:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="nombre" name="nombre"
+								placeholder="Nombre" th:value="${marca.nombre}">
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label for="txtDescripcion" class="col-sm-2 col-form-label">Descripcion
+							:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="descripcion"
+								name="descripcion" placeholder="Descripcion"
+								th:value="${marca.descripcion}">
+						</div>
+					</div>
+
+
+
+					<div align="right" class="form-group row">
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-success">
+								<i class="fas fa-save"></i> Grabar
+							</button>
+							<a th:href="@{/marca/lista}" class="btn btn-danger"> <i
+								class="fas fa-undo"></i> Cancelar
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="card-footer text-muted border-success"></div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

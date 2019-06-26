@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	
+
+	<div class="container">
+
+		<p></p>
+		<div class="card">
+			<div class="card-header text-white bg-secondary">Lista del detalle</div>
+			<div class="card-body">
+				<form th:action="@{/solicitudequipo/buscar}" method="get">
+					<div class="form-row align-items-center">
+						<div class="col-auto">
+							<label class="sr-only" for="inputNombre">Id</label><input
+								id="txtId" type="text" class="form-control" 
+								name="txtId"
+								placeholder="Id del detalle">
+						</div>
+						<div class="col-auto">
+							<button type="submit" class="btn btn-primary">Buscar</button>
+							
+					
+					</div>
+						</div>
+						<div class="card-text text-muted border-primary" align="right">
+							<a th:href="@{/solicitudequipo/nuevo}" class="btn btn-primary"> 
+								<i class="fas fa-plus-square"></i> Nuevo Detalle
+							</a>
+						</div>
+						
+					
+					
+					<p></p>
+					<p></p>
+					
+				</form>
+				
+				
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead class="bg-secondary text-white">
+							<tr>
+							
+								<th scope="col">Id</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Solicitud</th>
+								<th scope="col">Equipo</th>
+								
+								<th scope="col" colspan="3"> Opciones </th>
+							</tr>
+						</thead>
+						<tbody>
+					
+						<tr th:each="solep:${solicitudequipo}">
+								<th scope="row" th:text="${solep.id}"></th>
+								<td class="text-left" th:text="${solep.fecha}"></td>
+								<td class="text-left" th:text="${solep.solicitudId.id}"></td>
+								<td class="text-left" th:text="${solep.equipoId.id}"></td>
+								
+						
+						<td><a th:href="@{/}"    
+									class="btn btn-info"> <i class="fas fa-edit"></i>
+						</a></td>	
+						<td><a  th:href="@{/}"
+									class="btn btn-danger" > <i class="fas fa-trash-alt"></i>
+						</a></td>
+						
+						
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

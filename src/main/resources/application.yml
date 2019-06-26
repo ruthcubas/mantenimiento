@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ecdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: 1234
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+server:
+  port: 8081
+  
+  
+  
+  

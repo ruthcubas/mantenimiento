@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	
+
+	<div class="container">
+
+		<p></p>
+		<div class="card">
+			<div class="card-header text-white bg-secondary">Lista de solicitudes</div>
+			<div class="card-body">
+				<form th:action="@{/solicitud/buscar}" method="get">
+					<div class="form-row align-items-center">
+						<div class="col-auto">
+							<label class="sr-only" for="inputNombre">Id</label><input
+								id="txtId" type="text" class="form-control" 
+								name="txtId"
+								placeholder="Id de la solicitud">
+						</div>
+						<div class="col-auto">
+							<button type="submit" class="btn btn-primary">Buscar</button>
+							
+					
+					</div>
+						</div>
+						<div class="card-text text-muted border-primary" align="right">
+							<a th:href="@{/solicitud/nuevo}" class="btn btn-primary"> 
+								<i class="fas fa-plus-square"></i> Nuevo Solicitud
+							</a>
+							<a th:href="@{/solicitudequipo/lista}" class="btn btn-warning"> 
+								<i class="fas fa-link"></i> Detalle solicitud
+							</a>
+						</div>
+						
+					
+					
+					<p></p>
+					<p></p>
+					
+				</form>
+				
+				
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead class="bg-secondary text-white">
+							<tr>
+								<th>Id</th>
+								<th>Descripcion</th>
+								<th scope="col" colspan="3"> Opciones </th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr th:each="gsol:${solicitud}">
+						<td th:text="${gsol.id}"></td>
+						<td th:text="${gsol.descripcion}"></td>
+						
+						<td><a th:href="@{'/solicitud/editar/' + ${gsol.id}}"    
+									class="btn btn-info"> <i class="fas fa-edit"></i>
+						</a></td>	
+						<td><a  th:href="@{'/solicitud/eliminar/'+ ${gsol.id}}"
+									class="btn btn-danger" > <i class="fas fa-trash-alt"></i>
+						</a></td>
+						
+						
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
