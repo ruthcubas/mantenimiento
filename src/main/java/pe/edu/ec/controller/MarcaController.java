@@ -38,7 +38,7 @@ public class MarcaController {
 			model.addAttribute("error", e.getMessage());
 			
 		}
-		return "/marca/lista";
+		return "marca/lista";
 		
 	}
 	
