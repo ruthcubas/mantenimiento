@@ -1,5 +1,6 @@
 package pe.edu.ec.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,102 +16,99 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+
 import pe.edu.ec.entity.Rol;
 import pe.edu.ec.service.RolService;
 
 @Controller
 @RequestMapping("/rol")
-@SessionAttributes({"roles"})	
+@SessionAttributes("rol")
 public class RolController {
-	
-	@Autowired 
+
+	@Autowired
 	private RolService rolService;
 	
-	@GetMapping("/lista")
-	public String ListaRol(Model model) {
+	@GetMapping
+	public String listado(Model model) {
 		try {
-			model.addAttribute("roles", rolService.findAll());
+			List<Rol> roles = rolService.findAll();
+			model.addAttribute("roles", roles);
 		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
+			model.addAttribute("error", "Error al obtener la lista");
 		}
 		return "/rol/lista";
 	}
 	
-	
 	@GetMapping("/buscar")
-	public String buscarRol(@RequestParam("nombre") String nombre, Model model) {
-		
+	public String buscar(@RequestParam("txtId") String nombre, Model model) {
 		try {
-			if (!nombre.isEmpty()) {
-				List<Rol> roles=rolService.fetchRolByNombre(nombre);
-				if (roles.isEmpty()) {
-					model.addAttribute("roles", roles);
-				}else {
-					model.addAttribute("info", "El rol no existe");
-					model.addAttribute("roles", rolService.findAll());
-				}
-				
-			}else {
-				model.addAttribute("info", "Ingrese nombre del rol");
-				model.addAttribute("roles", rolService.findAll());
-			}
+			List<Rol> roles =  rolService.fetchRolByNombre(nombre);
+			model.addAttribute("roles", roles);
 			
 		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
+			model.addAttribute("error", "Error en obtener la lista");
 		}
-		return "/marca/lista";
+		return "/rol/lista";		
 	}
 	
-	@GetMapping("nuevo")
-	public String nuevoRol(Model model) {
+	@GetMapping("/nuevo")
+	public String nuevaMarca(Model model) {
 		try {
-			Rol rol= new Rol();
+			Rol rol = new Rol();
 			model.addAttribute("rol", rol);
+			
+			
 		} catch (Exception e) {
 			model.addAttribute("Error", "Rol no se ha guardado");
 		}
-		return "/rol/nuevo";
+		
+		return "/rol/nuevooo"; 
 	}
-	
-	
+		
 	@PostMapping("/guardar")
 	public String guardarRol(@ModelAttribute("rol") Rol rol, Model model, SessionStatus status) {
 		try {
+			
 			rolService.save(rol);
 			status.setComplete();
-			model.addAttribute("succes", "Rol guardado");
+			model.addAttribute("success", "Rol guardado");
 		} catch (Exception e) {
-			model.addAttribute("error", "Rol no guardad");
-		}
-		return "redirect:/rol/lista";
+			model.addAttribute("error", "Rol no guardado");
+		} 
+		return "redirect:/rol";
 	}
-	
-	@GetMapping("/eliminar/{id}")
-	public String eliminarRol(@PathVariable("id") Integer id, Model model) {
-		try {
-			Optional<Rol> buscado = rolService.findById(id);
-			if (buscado.isPresent()) {
-				rolService.deleteById(id);
-			}
-		} catch (Exception e) {
-			model.addAttribute("error", "Rol no eliminado");
-		}
-		return "redirect:/rol/lista";
-	}
-	
+
 	@GetMapping("/editar/{id}")
-	public String editarRol(@PathVariable("id") Integer id, Model model) {
+	public String editarMarca( @PathVariable("id") Integer id, Model model) {
+
 		try {
-			Optional<Rol> buscado = rolService.findById(id);
+			Optional<Rol> buscado =  rolService.findById(id);
 			if (buscado.isPresent()) {
 				model.addAttribute("rol", buscado.get());
-			}else {
+			} else {
 				model.addAttribute("error", "Rol no encontrado");
 			}
 		} catch (Exception e) {
-			model.addAttribute("error", "Rol no encontrado");
+			model.addAttribute("error", "Rol no encontrada");
 		}
 		return "/rol/editar";
+		
 	}
-
+	
+	@GetMapping("/eliminar/{id}")
+	public String eliminarRol( @PathVariable("id") Integer id, Model model  ) {
+		try {
+			Optional<Rol> buscado = rolService.findById(id);
+			if(buscado.isPresent()) {
+				rolService.deleteById(id);
+			}
+		} catch (Exception e) {
+			model.addAttribute("error", "rol no eliminado");
+		}
+		return "redirect:/rol";
+	}
+	
+	
+	
+	
 }

@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 public class Rol {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "rol_id", nullable = false)
+	@Column(name = "rol_id")
 	private Integer id;
 
 	@Size(min = 3)

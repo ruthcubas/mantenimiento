@@ -35,7 +35,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		// TODO Auto-generated method stub
 		return usuarioRepository.save(t);
 	}
-	@Transactional(readOnly = true)
+	@Transactional
 	@Override
 	public Optional<Usuario> findById(Integer id) throws Exception {
 		// TODO Auto-generated method stub

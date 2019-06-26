@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import pe.edu.ec.entity.Equipo;
 
@@ -34,6 +38,8 @@ public class SolicitudEquipoController {
 	
 	@GetMapping("/lista")
 	public String ListaSolicitudEquipo(Model model) {
+		
+		
 		try {
 			
 			model.addAttribute("solicitudequipo", solicitudEquipoService.findAll());
@@ -45,6 +51,8 @@ public class SolicitudEquipoController {
 		
 	}
 	
+	
+
 	
 	@GetMapping("/buscar")
 	public String buscarSolicitudEquipo(@RequestParam("txtId") Integer id, Model model) {
@@ -64,30 +72,81 @@ public class SolicitudEquipoController {
 		return "/solicitudequipo/lista";
 	}
 	
-	@GetMapping("/nuevo")
-	public String nuevoSolicitudEquipo(Model model) {
-		try {
-			SolicitudEquipo solicitudequipo = new SolicitudEquipo();
-			
-			
-			Optional<Equipo> equipo = equipoService.findById(0);
-			solicitudequipo.setEquipoId(equipo.get());	
-			
-			Optional<Solicitud> solicitud = solicitudService.findById(0);
-			solicitudequipo.setSolicitudId(solicitud.get());
-			
-			model.addAttribute("solicitudequipo", solicitudequipo );	
-			
-			List<Equipo> equipos = equipoService.findAll();
-			model.addAttribute("equipo", equipos);
-			
-			List<Solicitud> solicituds= solicitudService.findAll();
-			model.addAttribute("solicitud", solicituds);
 
-		} catch (Exception e) {
-			model.addAttribute("Error", "El modelo no se ha guardado");
+	 @GetMapping("/nuevo")
+		public String nuevoSolicitudEquipo(Model model) {
+			try {
+				SolicitudEquipo solicitudEquipo = new SolicitudEquipo();
+				model.addAttribute("solicitudequipo", solicitudEquipo);
+				
+				List<Equipo> equipos=equipoService.findAll();
+				model.addAttribute("equipo",equipos);
+				
+				List<Solicitud> solicitudes = solicitudService.findAll();
+				model.addAttribute("solicitud",solicitudes);
+
+			} catch (Exception e) {
+				model.addAttribute("Error", "No se pudo guardar el detalle");
+			
+			}
+			return "/solicitudequipo/nuevo"; 
 		}
 		
-		return "/solicitudequipo/nuevo"; 
+	 @PostMapping("/guardar")
+		public String guardarSolicitudEquipo(@ModelAttribute("solicitudequipo") SolicitudEquipo solicitudequipo, Model model, SessionStatus status) {
+			try {	
+				solicitudEquipoService.save(solicitudequipo);
+				status.setComplete();
+				model.addAttribute("success", "Detalle guardado");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				model.addAttribute("error", "Detalle no guardado");
+			} 
+			return "redirect:/solicitudequipo/lista";
+		}
+	  
+	 @GetMapping("/eliminar/{id}")
+		public String eliminarSolicitudEquipo( @PathVariable("id") Integer id, Model model  ) {
+			try {
+				Optional<SolicitudEquipo> buscado = solicitudEquipoService.findById(id);
+				if(buscado.isPresent()) {
+					solicitudEquipoService.deleteById(id);
+				}
+			} catch (Exception e) {
+				model.addAttribute("error", "Detalle no eliminado");
+			}
+			return "redirect:/solicitudequipo/lista";
+		}
+	 
+	 @GetMapping("/editar/{id}")
+		public String editarSolicitudEquipo( @PathVariable("id") Integer id, Model model) {
+
+			try {
+				Optional<SolicitudEquipo> buscado =  solicitudEquipoService.findById(id);
+				if (buscado.isPresent()) {
+					model.addAttribute("solicitudequipo", buscado.get());
+					
+					
+					List<Equipo> equipos=equipoService.findAll();
+					model.addAttribute("equipo",equipos);
+					
+					List<Solicitud> solicitudes = solicitudService.findAll();
+					model.addAttribute("solicitud",solicitudes);
+					
+					
+				} else {
+					model.addAttribute("error", "Detalle no encontrado");
+				}
+			} catch (Exception e) {
+				model.addAttribute("error", "Detalle no encontrado");
+			}
+			return "/solicitudequipo/editar";	
+		}
+		
 	}
-}
+
+
+
+
+	
+

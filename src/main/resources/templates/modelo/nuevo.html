@@ -46,9 +46,9 @@
 							:</label>
 						<div class="col-sm-9">							
 							<select th:field="*{marcaId}" class="form-control"  id="marcaId" name="marcaId">
-								<option th:each="mar : ${marca}"
-									th:value="${mar.id}" th:text="${mar.nombre}"
-									th:selected="${modelo.marcaId.id}"></option>
+								<option th:each="marc : ${marcas}"
+									th:value="${marc.id}" th:text="${marc.nombre}"
+									></option>
 							</select>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 							<button type="submit" class="btn btn-success" >
 								<i class="fas fa-save"></i> Grabar
 							</button>
-							<a th:href="@{/modelo/lista}" class="btn btn-danger"> <i
+							<a th:href="@{/modelo}" class="btn btn-danger"> <i
 								class="fas fa-undo"></i> Cancelar
 							</a>
 						</div>

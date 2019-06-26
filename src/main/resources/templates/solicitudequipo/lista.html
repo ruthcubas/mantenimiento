@@ -41,13 +41,16 @@
 				
 				<div class="table-responsive">
 					<table class="table table-striped">
-						<thead class="bg-secondary text-white">
+						<thead class="bg-primary text-white">
 							<tr>
 							
 								<th scope="col">Id</th>
 								<th scope="col">Fecha</th>
-								<th scope="col">Solicitud</th>
+								<th scope="col">Id Solicitud</th>
+								<th scope="col">Descripcion Solicitud</th>
+								<th scope="col">Id Equipo</th>
 								<th scope="col">Equipo</th>
+
 								
 								<th scope="col" colspan="3"> Opciones </th>
 							</tr>
@@ -58,13 +61,15 @@
 								<th scope="row" th:text="${solep.id}"></th>
 								<td class="text-left" th:text="${solep.fecha}"></td>
 								<td class="text-left" th:text="${solep.solicitudId.id}"></td>
+								<td class="text-left" th:text="${solep.solicitudId.descripcion}"></td>
 								<td class="text-left" th:text="${solep.equipoId.id}"></td>
-								
+								<td class="text-left" th:text="${solep.equipoId.nombre}"></td>
 						
-						<td><a th:href="@{/}"    
+						
+						<td><a th:href="@{'/solicitudequipo/editar/'+ ${solep.id}}"    
 									class="btn btn-info"> <i class="fas fa-edit"></i>
 						</a></td>	
-						<td><a  th:href="@{/}"
+						<td><a  th:href="@{'/solicitudequipo/eliminar/'+ ${solep.id}}"
 									class="btn btn-danger" > <i class="fas fa-trash-alt"></i>
 						</a></td>
 						

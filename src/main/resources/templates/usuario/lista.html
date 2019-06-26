@@ -3,21 +3,19 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	
 
 	<div class="container">
-
-		<p></p>
+				<p></p>
 		<div class="card">
-			<div class="card-header text-white bg-secondary">Roles</div>
+			<div class="card-header text-white bg-secondary">Lista de usuarios</div>
 			<div class="card-body">
-				<form th:action="@{'/rol/buscar'}" method="get">
+				<form th:action="@{/usuario/buscar}" method="get">
 					<div class="form-row align-items-center">
 						<div class="col-auto">
 							<label class="sr-only" for="inputNombre">Nombre</label><input
-								id="inputNombre" type="text" class="form-control" 
-								name="nombre"
-								placeholder="Nombre de rol">
+								id="txtNombre" type="text" class="form-control" 
+								name="txtNombre"
+								placeholder="Nombre del usuario">
 						</div>
 						<div class="col-auto">
 							<button type="submit" class="btn btn-primary">Buscar</button>
@@ -26,8 +24,8 @@
 					</div>
 						</div>
 						<div class="card-text text-muted border-primary" align="right">
-							<a th:href="@{/rol/nuevo}" class="btn btn-primary"> 
-								<i class="fas fa-plus-square"></i> Nuevo Rol
+							<a th:href="@{/usuario/nuevo/}" class="btn btn-primary"> 
+								<i class="fas fa-plus-square"></i> Nuevo Usuario
 							</a>
 						</div>
 					
@@ -35,42 +33,48 @@
 					<p></p>
 					
 				</form>
-				
-				
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<thead class="bg-primary text-white">
 							<tr>
 								<th scope="col">Id</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Descripcion</th>
-								<th scope="col" colspan="2"> Opciones </th>
+								<th scope="col">Apellido</th>
+								<th scope="col">dni</th>
+								<th scope="col">Celular</th>
+								<th scope="col">Direccion</th>
+								<th scope="col">Rol</th>
+								
+								<th scope="col" colspan="3"></th>
 							</tr>
 						</thead>
-						<tbody>
-								<tr th:each="rolito:${roles}">
-								<th scope="row" th:text="${rolito.id}"></th>
-								<td  th:text="${rolito.nombre}"></td>
-								<td  th:text="${rolito.descripcion}"></td>
-						
-						<td><a th:href="@{'/rol/editar/' + ${rolito.id}}"    
+						<tbody>					
+							    <tr th:each="user:${usuarios}">
+							    <td th:text="${user.id}"></td>
+								<td th:text="${user.nombre}"></td>
+							    <td th:text="${user.apellido}"></td>
+								<td th:text="${user.dni}"></td>
+								<td th:text="${user.celular}"></td>
+								<td th:text="${user.direccion}"></td>
+								<td th:text="${user.rolId.nombre}"></td>
+								
+							  	<td><a th:href="@{'/usuario/editar/' + ${user.id}}"    
 									class="btn btn-info"> <i class="fas fa-edit"></i>
 						</a></td>	
-						<td><a  th:href="@{'/rol/eliminar/' + ${rolito.id}}"
+						<td><a  th:href="@{'/usuario/eliminar/'+ ${user.id}}"
 									class="btn btn-danger" > <i class="fas fa-trash-alt"></i>
-						</a></td>
-						
-						
+						</a></td>							 
+							</tr>
 						</tbody>
 					</table>
 				</div>
+
 			</div>
-			
+		
 		</div>
-
-
 	</div>
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>
+

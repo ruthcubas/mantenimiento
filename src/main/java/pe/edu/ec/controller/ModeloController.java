@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import pe.edu.ec.entity.Marca;
 import pe.edu.ec.entity.Modelo;
+
 import pe.edu.ec.service.MarcaService;
 import pe.edu.ec.service.ModeloService;
 
@@ -34,7 +35,7 @@ public class ModeloController {
 	@Autowired
 	private MarcaService marcaService;
 	
-	@GetMapping("/lista")
+	@GetMapping
 	public String ListaModelo(Model model) {
 		try {
 			
@@ -48,46 +49,29 @@ public class ModeloController {
 	}
 	
 	@GetMapping("/buscar")
-	public String buscarModelo(@RequestParam("nombre") String nombre, Model model) {
+	public String buscarModelo(@RequestParam("inputNombre") String nombre, Model model) {
 		
 		try {
-			
-			if(!nombre.isEmpty()) {
-				List<Modelo> modelos = modeloService.fetchModeloByNombre(nombre);
-				if(!modelos.isEmpty()) {
-					model.addAttribute("modelos", modelos );
-					}
-					else {
-						model.addAttribute("info", "No existe modelo");
-						model.addAttribute("modelo",modeloService.findAll() );
-				}
-				
-			}else {
-				model.addAttribute("info", "Ingresar nombre de la modelo");
-				model.addAttribute("modelos",modeloService.findAll() );
-			}
+			List<Modelo > modelos =  modeloService.fetchModeloByNombre(nombre);
+			model.addAttribute("modelos",modelos);
 			
 		} catch (Exception e) {
-			model.addAttribute("error", e.getMessage());
+			model.addAttribute("error", "Error en obtener la lista");
 		}
-		return"/modelo/lista";
+		return "/modelo/lista";
 	}
 	
 	@GetMapping("/nuevo")
 	public String nuevoModelo(Model model) {
 		try {
 			Modelo modelo = new Modelo();
-			Optional<Marca> marca = marcaService.findById(1);
-			modelo.setMarcaId(marca.get());	
-			model.addAttribute("modelo", modelo);	
-			
-			List<Marca> marcas = marcaService.findAll();
-			model.addAttribute("marca", marcas);
-
+			model.addAttribute("modelo", modelo);
+			List<Marca> marcas =marcaService.findAll();
+			model.addAttribute("marcas", marcas);
 		} catch (Exception e) {
-			model.addAttribute("Error", "El modelo no se ha guardado");
-		}
+			model.addAttribute("Error", "No se pudo guardar el modelo");
 		
+		}
 		return "/modelo/nuevo"; 
 	}
 	@GetMapping("/editar/{id}")
@@ -105,8 +89,7 @@ public class ModeloController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Modelo no encontrado");
 		}
-		return "/modelo/editar";
-		
+		return "/modelo/editar";	
 	}
 	
 	@PostMapping("/guardar")
@@ -119,7 +102,7 @@ public class ModeloController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Modelo no guardado");
 		} 
-		return "redirect:/modelo/lista";
+		return "redirect:/modelo";
 	}
 	
 	
@@ -134,7 +117,7 @@ public class ModeloController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Modelo no eliminado");
 		}
-		return "redirect:/modelo/lista";
+		return "redirect:/modelo";
 	}
 	
 }
